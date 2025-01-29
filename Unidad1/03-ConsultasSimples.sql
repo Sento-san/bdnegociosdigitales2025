@@ -2,6 +2,7 @@
 --Consultas Simples
 
 create database Northwind;
+
 use Northwind;
 
 --Mostrar todos los clientes, provedores, 
@@ -55,13 +56,6 @@ CustomerID as Cliente,
 EmployeeID as Empleado 
 from Orders;
 
--- Eliminar Filas/Datos Duplica@s de una tabla(Distinct)
-
--- Mostrar los países en donde se tienen clientes,
--- mostrando pais solamente
-select distinct Country from Customers
-order by Country;
-
 -- Clausula where
 -- Operadores relacionales(<, >, =, <=, >=, !=, <>)
 select * from Customers;
@@ -108,43 +102,4 @@ select OrderDate as [Fecha de Orden],
 RequiredDate as [Fecha de entrega],
 ShippedDate as [Fecha de envio],
 ShipName as [Cliente]
-from Orders where year(OrderDate) = '1996';
-
--- Mostrar todas las ordenes de compra donde
--- la cantidad de productos comprados sea mayor a 5
-select Quantity as CantidadVendida 
-from [Order Details] where Quantity>40;
-
--- Mostrar el nombre completo del empleado, su numero de empleado,
--- fecha de nacimiento, ciudad, y fecha de contratacion la cual
--- debe ser de los que fueron contratados despues de 1993,
--- los resultados en sus encabezados deben ser mostrados en Español.
-select EmployeeID as NumeroEmpleado,
-FirstName as Nombre,
-LastName as Apellido,
-City as Çiudad, 
-HireDate as FechaContrato
-from Employees where year(HireDate)>1993;
-
--- version 2
-select EmployeeID as NumeroEmpleado,
-(FirstName + '  ' + LastName) as 'NombreCompleto',
-City as Ciudad, 
-HireDate as FechaContrato
-from Employees where year(HireDate)>1993;
-
--- version 3
-select EmployeeID as NumeroEmpleado,
-Concat (FirstName , '  ', LastName, ' - ' , Title) as NombreCompleto,
-City as Ciudad, 
-HireDate as FechaContrato
-from Employees where year(HireDate)>1993;
-
--- Mostrar los empleados que no son dirigidos por el jefe 2.
-select EmployeeID as Numero,
-FirstName as Nombre
-from Employees where ReportsTo != 2;
-
--- Seleccionar los empleados que no tengan feje
-select * from Employees 
-where ReportsTo is null;
+from Orders where year(OrderDate) = 1996;
