@@ -145,6 +145,97 @@ select EmployeeID as Numero,
 FirstName as Nombre
 from Employees where ReportsTo != 2;
 
--- Seleccionar los empleados que no tengan feje
+-- Seleccionar los empleados que no tengan jefe
 select * from Employees 
 where ReportsTo is null;
+
+-- Operadores lógicos (or, and y not)
+-- Seleccionar los productos que tengan un precio de entre 10 y 50
+select ProductName as Nombre,
+UnitPrice as Precio,
+UnitsInStock as Existencia
+from Products 
+where UnitPrice>=10 and UnitPrice<=50;
+
+-- Mostrar todos los pedidos realizados por 
+-- clientes que no son enviados a Alemania.
+select * from Orders where ShipCountry != 'Germany';
+select * from Orders where not ShipCountry = 'Germany';
+
+-- Seleccionar clientes de Mexico o Estados Unidos.
+select * from Customers where Country = 'Mexico' or Country = 'USA';
+
+-- Seleccionar los empleados que nacieron entre 1955 y 1958
+-- y que vivan en Londres.
+select * from Employees 
+where (year(BirthDate) >= '1955' or year(BirthDate) <=1958) and City = 'Londono';
+
+-- Seleccionar los pedidos con flete de peso (Freight) mayor 
+-- a 100 y enviados a Francia o España.
+select OrderID, OrderDate, ShipCountry, Freight from Orders 
+where Freight >= 100 and (ShipCountry = 'France' or ShipCountry = 'Spain');
+
+-- Seleccionar las primeras 5(top 5) ordenes de compra.
+select top 5 * from Orders;
+
+-- Seleccionar los productos con precio entre $10 y $50,
+-- que NO esten descontinuados y tengan mas de 20 unidades de stock.
+select ProductName, UnitPrice, UnitsInStock, Discontinued
+from Products 
+where (UnitPrice >= 10 and UnitPrice <= 50) and
+(not Discontinued = 1 and UnitsInStock > 20);
+
+-- Seleccionar los pedidos enviados a Francia o Alemania, 
+-- pero con un flete menor a 50.
+select OrderID, CustomerID, ShipCountry, Freight
+from Orders 
+where (ShipCountry = 'France' or ShipCountry = 'Germany') and Freight < 50;
+
+-- Seleccionar los clientes que NO sean de Mexico o USA
+-- y que tengan fax registrado.
+select CompanyName, City, Country, Fax
+from Customers
+where not (Country = 'Mexico' or Country = 'USA') 
+and Fax is not null;
+
+-- Seleccionar los pedidos con un flete mayor a 100
+-- enviados a Brasil o Argentina,
+-- pero NO enviados por el transportista 1.
+
+-- Seleccionar Empleados que NO viven en Londren o Seattle
+-- y que fueron contratados despues de 1995
+select concat(FirstName, ' ', LastName) as NombreCompleto,
+HireDate, City, Country
+from Employees
+where not(City = 'London' or City = 'Seattle')
+and year(HireDate)>=1992;
+
+select concat(FirstName, ' ', LastName) as NombreCompleto,
+HireDate, City, Country
+from Employees
+where City != 'London' and City != 'Seattle'
+and year(HireDate)>=1992;
+
+-- Clausula IN (or)
+-- seleccionar los productos con categoria 1, 3 o 5
+select ProductName, CategoryID, UnitPrice 
+from Products
+where CategoryID = 1 or CategoryID = 3 or CategoryID = 5;
+
+select ProductName, CategoryID, UnitPrice 
+from Products
+where CategoryID in (1,3,5);
+
+-- Seleccionar todas las ordenes de la region RJ, Tachira
+-- y que no tengan region asignada.
+select OrderID, OrderDate,ShipRegion
+from Orders
+where ShipRegion in ('RJ', 'Táchira') or ShipRegion is null;
+
+-- Seleccionar las ordenes que tengan cantidades de 12, 9 o 40
+-- y descuento de 0.15 y 0.5.
+select OrderID, Quantity, Discount
+from [Order Details]
+where Quantity in (12, 9, 40) and Discount in (0.15, 0.05);
+
+-- Clausula Betwin
