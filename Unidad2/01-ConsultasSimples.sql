@@ -239,3 +239,107 @@ from [Order Details]
 where Quantity in (12, 9, 40) and Discount in (0.15, 0.05);
 
 -- Clausula Betwin
+-- Mostrar los productos con precio entre 10 y 50
+select * from Products
+where UnitPrice >= 10 and UnitPrice <= 50;
+
+select * from Products
+where UnitPrice between 10 and 50;
+
+-- Seleccionar todos los pedidos realizados entre 
+-- el 1 de Enero y el 30 de Junio de 1997.
+select OrderDate as FechaOrden
+from Orders 
+where year(OrderDate) = 1997 and ((day(OrderDate) between 1 and 30)
+and month(OrderDate) between 'Enero' and 'Junio');
+
+select * from Orders
+where OrderDate >= '1997-01-01' and
+OrderDate <= '1997-05-30';
+
+select * from Orders
+where OrderDate between '1997-01-01' and '1997-05-30';
+
+-- Seleccionar todos los empleados contratados entre 
+-- 1990 y 1995 que trabajan en Londres.
+select FirstName as Nombre,
+LastName as Apellido, 
+HireDate as FechaContrato, 
+City as Ciudad
+from Employees 
+where (year(HireDate) between '1992' and '1994') 
+and City = 'London';
+
+-- Seleccionar los pedidos con flete entre 50 y 200 enviados
+-- a Alemania y a Francia.
+select OrderID as NumeroOrden,
+Freight as Peso,
+ShipCountry as PaisEntrega
+from Orders
+where Freight between 50 and 200
+and ShipCountry in( 'France', 'Germany');
+
+-- Seleccionar todos los produntos que tengan un precio 
+-- entre 5 y 20 dolares o que sean de la categoria 1,2 o 3
+select ProductName as NombreProducto,
+CategoryID as Categoria,
+UnitPrice as Precio
+from Products
+where (UnitPrice between 5 and 20) 
+and (CategoryID in (1, 2, 3));
+
+select ProductID as NumeroProducto,
+CategoryID as Categoria,
+UnitPrice as Precio
+from Products 
+where UnitPrice >= 5 and UnitPrice <= 20
+and (CategoryID = 1 or CategoryID = 2 or CategoryID = 3);
+
+-- Seleccionar los empleados con numero de trabajador entre 3 y 7
+-- que no trabajan en Londres ni Seattle.
+select FirstName as Nombre,
+EmployeeID as NumeroEmpleado,
+City as Ciudad
+from Employees
+where (EmployeeID between 3 and 7)
+and not(City in ('London', 'Seattle'));
+
+select EmployeeID as NumeroEmpleado,
+concat(FirstName, ' ',LastName) as NombreEmpleado,
+City as Ciudad
+from Employees
+where EmployeeID >= 3 and EmployeeID <= 7
+and (City<>'London' and City!='Seattle');
+
+-- Clausula Like
+-- patrones
+	-- 1) % (porcentaje) Representa cero o mas caracteres en el patron.
+	-- 2) _ (guion bajo) Representa exactamente un caracter en el patron
+	-- de busqueda.
+	--3) [] (corchetes) Se uriliza para definir un conjunto de caracteres
+	-- buscando cualquiera de ellos en la posicion especifica.
+	--4) [^] (potencia) Se utiliza para buscar caracteres que no estan
+	-- dentro del conjunto especifico.
+
+-- Buscar los productos que comienzan con "C"
+select * from Products
+where ProductName like 'Cha%';
+
+select * from Products
+where ProductName like 'Cha%'
+and UnitPrice = 18;
+
+-- Mostrar todos los productos que terminen con "e".
+select * from Products
+where ProductName like '%e';
+
+-- Seleccionar todos lo clientes cuyo nombre de empresa
+-- contiene la palabra "co" en cualquier parte.
+select * from Customers
+where CompanyName like '%co%';
+
+-- Seleccionar los empleados cuyo nombre comience con "A"
+-- y que tenga exactamente 5 caracteres
+select FirstName, LastName
+from Employees
+where FirstName like 'A_____';
