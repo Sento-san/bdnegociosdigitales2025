@@ -343,3 +343,49 @@ where CompanyName like '%co%';
 select FirstName, LastName
 from Employees
 where FirstName like 'A_____';
+
+-- Seleccionar los productos que comiencen con A o B
+select * from Products
+where ProductName like '[ABC]%';
+
+select * from Products
+where ProductName like '[A-M]%';
+
+-- Seleccionar todos los productos que no comiencen 
+-- con A o B.
+select * from Products
+where ProductName like '[^AB]%';
+
+-- Seleccionar todos los productos donde el nombre
+-- comience con A pero no contenga la E.
+select * from Products
+where ProductName like 'A[e]%';
+
+-- Clausula order by 
+select ProductID as NumeroProducto,
+ProductName as NombreProducto,
+UnitPrice as PrecioUnico,
+UnitsInStock as CantidadSobrante
+from Products
+order by UnitPrice; 
+
+select ProductID as NumeroProducto,
+ProductName as NombreProducto,
+UnitPrice as PrecioUnico,
+UnitsInStock as CantidadSobrante
+from Products
+order by 1;
+
+-- Seleccionar los clientes ordenados por el pais
+-- y dentro por ciudad
+select CustomerID, Country, City, Region
+from Customers
+where Country in ('Germany', 'Brazil')
+and Region is not null
+order by Country, City;
+
+select CustomerID, Country, City, Region
+from Customers
+where Country in ('Germany', 'Brazil')
+and Region is not null
+order by Country, City desc;
