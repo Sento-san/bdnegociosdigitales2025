@@ -1,3 +1,8 @@
+# Inner Joins
+
+![Inner Join](../img/descargar.jpeg)
+
+```sql
 
 use Northwind;
 -- Seleccionar todas las categorias y productos
@@ -202,7 +207,7 @@ on e.EmployeeID = o.EmployeeID
 where o.ShipCountry = 'Germany';
 
 -- 13. Listar los productos junto con el nombre
--- del provedor y el país de origen
+-- del provedor y el paï¿½s de origen
 select p.ProductName as 'Nombre Producto',
 s.CompanyName as 'Provedor',
 s.Country as 'Pais de Origen'
@@ -275,14 +280,14 @@ Shippers as s
 on o.ShipVia = s.ShipperID
 group by o.ShipName;
 
-select s.CompanyName as 'Émpresa Transporte',
+select s.CompanyName as 'ï¿½mpresa Transporte',
 count(*) as 'Cantidad de pedidos'
 from
 Shippers as s
 INNER JOIN
 Orders AS o
 on s.ShipperID = o.ShipVia
-group by s.CompanyName;
+group byï¿½s.CompanyName;
 
 -- Consultas Avanzadas
 
@@ -415,3 +420,4 @@ inner join
 on od.OrderID = o.OrderID
 group by c.CompanyName
 having sum(od.Quantity*od.UnitPrice) between 500 and 2000;
+```
