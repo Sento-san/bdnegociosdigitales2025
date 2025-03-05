@@ -415,3 +415,9 @@ inner join
 on od.OrderID = o.OrderID
 group by c.CompanyName
 having sum(od.Quantity*od.UnitPrice) between 500 and 2000;
+
+-- Seleccionar los datos que se van a utilizar para insertar
+-- en la tabla products-new
+
+-- product_id, productName, customer, category, unitprice,
+-- discontinued, inserted-date
