@@ -22,21 +22,23 @@ begin
 	not exists (select 1 from Representantes where Num_Empl = @repre) or
 	not exists (select 1 from Productos where Id_fab = @fab and Id_producto = @producto)
 	begin
-	print 'Los datos no son validos'
-	return
+		print 'Los datos no son validos'
+		return
 	end 
 	if @cantidad <= 0
 	begin
-	print 'La cantidad no puede ser 0 o negativo'
-	return;
+		print 'La cantidad no puede ser 0 o negativo'
+		return;
 	end
+
 	declare @stockValido int
 	select @stockValido = stock from Productos where Id_fab = @fab and Id_producto = @producto
 	if @cantidad > @stockValido 
 	begin
-	print 'No hay suficiente stock'
-	return
+		print 'No hay suficiente stock'
+		return
 	end
+
 	declare @precio money
 	declare @importe money
 	
@@ -53,8 +55,8 @@ begin
 
 	end try 
 	begin catch
-	print 'Error al actualizar los datos'
-	return;
+		print 'Error al actualizar los datos'
+		return;
 	end catch
 end;
 
