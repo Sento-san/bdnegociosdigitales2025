@@ -12,8 +12,9 @@ set @Numero = 10;
 print @Numero;
 
 -- Obtener el tamaño de la cadena almacenada en la variable Texto
+use Northwind
 declare @Text varchar(50) = 'Hola, Mundo!';
-select len(@Texto) as longitud;
+select len(@Text) as longitud;
 
 select CompanyName, len(CompanyName) as 'Numero de Caracteres',
 left(CompanyName, 4) as inicio,
@@ -31,18 +32,22 @@ go
 -- desde el final de la cadena
 declare @Texto varchar(50) = 'Hola, Mundo!';
 select right(@Texto, 6) as final
+go
 
 -- Substring -> Extrae una parte de la cadena
 declare @Texto varchar(50) = 'Hola, Mundo!';
 select substring(@Texto, 7,5);
+go
 
 -- Replace Remplaza una subcadena por otra
 declare @Texto varchar(50) = 'Hola, Mundo!';
 select replace(@Texto, 'Mundo!', 'Amigo!')
+go
 
 -- CharIndex
 declare @Texto varchar(50) = 'Hola, Mundo!';
 select charindex('hola', @Texto);
+go
 
 -- Upper -> Convierte una cadena en mayusculas
 declare @Texto varchar(50) = 'Hola, Mundo!';

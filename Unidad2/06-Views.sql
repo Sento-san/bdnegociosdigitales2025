@@ -44,7 +44,7 @@ orders as o
 inner join 
 VistaClientesLatinos as vcl
 on vcl.CustomerID = o.CustomerID
-
+go
 -- Crear una vista que contenga los datos de todas las ordenes 
 -- los productos, categorias de productos, empleados y clientes,
 -- en la orden calcular el importe 
@@ -76,7 +76,10 @@ on e.EmployeeID = o.EmployeeID
 select sum(Importe) as 'Importe_Total'
 from VistaOrdenesCompra
 where year([Fecha de Orden]) between '1995' and '1996'
+go
 
+-- Crea una vista que muestre las ordenes entre 1995 y 1996,
+-- junto con los datos del cliente y el importe
 create or alter view Vista_Ordenes_1995_1996
 as
 select [Nombre Cliente], sum(Importe) as 'Importe_Total'
@@ -84,7 +87,6 @@ from VistaOrdenesCompra
 where year([Fecha de Orden]) between '1995' and '1996'
 group by [Nombre Cliente]
 having count(*)>2
-
 go
 
 create schema rh
