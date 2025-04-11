@@ -91,3 +91,14 @@ begin
 	where Id_fab = @fab and 
 	Id_producto = @prod;
 end;
+
+declare @importe money
+select @importe = (p.Cantidad * pr.Precio)
+from Pedidos as p
+inner join Productos as pr
+on p.Fab = pr.Id_fab
+and p.Producto = pr.Id_producto
+
+delete into pedidos (Num_Pedido, Fecha_Pedido, Cliente, 
+Rep, Fab, Producto, Cantidad, Importe)
+values (113071, getdate(), 2103, 106, 'ACI', '41001', 77, @importe)
